@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Public bio-database</title>
+</head>
+<body>
+<script>
+    {% include "gateway/login.js" %}
+</script>
+  <h1>Log in</h1>
+  <p>
+  Username:
+  <input id="username" name='username' type="text"></input>
+  </p>
+
+  <p>
+    Password:
+  <input id='password' name="password" type="password"></input>
+  </p>
+
+  <p>
+    <button type="button" onclick="onLoginClick()">Log in</button>
+  </p>
+
+</body>
+</html>
