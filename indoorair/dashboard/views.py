@@ -16,6 +16,11 @@ def dashboard(request):
 
     return render(request, "dashboard/dashboard.html", {})
 
+def get_dashboard_api(request):
+    return JsonResponse({
+        'version': '1.0',
+    })
+
 
 def get_temperature(request):
     temperature_avg = request.POST.get("temperature")

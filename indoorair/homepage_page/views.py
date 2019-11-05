@@ -1,15 +1,12 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect
 
 
-def index(request):
-    return render(request, 'homepage_page/index.html', {
+def index_page(request):
+    return render(request, 'homepage_page/index.html', {})
 
-    })
-
-def contact(request):
+def contact_page(request):
     return render (request, "homepage_page/contact.html", {})
 
-def get_version(request):
+def get_version_api(request):
     return JsonResponse({'version': '0.1.0-beta'})

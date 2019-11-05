@@ -1,16 +1,8 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
-def login_page(request):
-    user = request.user
-
-    context = {
-        'user' : user,
-    }
-
-    return render (request, "gateway/login.html", context)
 
 def register_page(request):
     user = request.user
@@ -19,7 +11,7 @@ def register_page(request):
         'user' : user,
     }
 
-    return render (request, "gateway/register.html", context)
+    return render (request, "gateway/register.html", {})
 
 def register_success(request):
     return render(request, "gateway/register_successfuly.html", {})
@@ -32,6 +24,9 @@ def contact(request):
     }
 
     return render (request, "homepage_page/contact.html", context)
+
+def login_page(request):
+    return render (request, "gateway/login.html", {})
 
 def post_login_api(request):
     username = request.POST.get("username")
@@ -66,23 +61,18 @@ def post_login_api(request):
         })
 
 def post_register_api(request):
+    first_name = request.POST.get("first_name")
+    last_name = request.POST.get("last_name")
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+
+    print(first_name, last_name, username, email, password)
 
     try:
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-
-
-        print(username, password, first_name, last_name)
-
-        user = User.objects.create_user(username, password)
-        user.last_name = last_name
-        user.first_name = first_name
-        user.save()
-
+        user = User.objects
         return JsonResponse({
             "was_registered": True,
+            "reason": None,
         })
 
     except Exception as e:

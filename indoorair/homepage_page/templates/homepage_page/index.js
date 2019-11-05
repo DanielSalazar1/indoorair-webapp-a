@@ -6,14 +6,18 @@ function onRegisterClick() {
   window.location.href  = "{% url 'register_page' %}";
 }
 
-function onVersionClick() {
+function onGetVersionClick() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById('version').innerHTML = this.responseText;
+        const dataString = this.responseText
+        const dataDict = JSON.parse(dataString);
+
+        var element = document.getElementById('getVersionId');
+        element.innerHTML = dataDict.version;
       }
     };
-    xhttp.open('GET', 'version', true);
+    xhttp.open('GET', 'api/version', true);
     xhttp.send();
 }
 
