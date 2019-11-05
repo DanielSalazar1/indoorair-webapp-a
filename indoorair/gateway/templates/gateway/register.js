@@ -3,6 +3,7 @@ function onRegisterClick() {
    const lastName = document.getElementById("last_name").value;
    const username = document.getElementById("username").value;
    const password = document.getElementById("password").value;
+   const email = document.getElementById("email").value;
 
    var xhttp = new XMLHttpRequest();
    xhttp.onreadystatechange = function() {
@@ -21,5 +22,5 @@ function onRegisterClick() {
    }
    xhttp.open("POST", "{% url 'register_api' %}", true);
    xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-   xhttp.send("first_name="+firstName+"&last_name="+lastName+"&username="+username+"&password="+password);
+   xhttp.send("first_name="+firstName+"&last_name="+lastName+"&username="+username+"&password="+password+"&email="+email);
 }

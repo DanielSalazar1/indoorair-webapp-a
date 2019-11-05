@@ -16,14 +16,33 @@ def register_page(request):
 def register_success(request):
     return render(request, "gateway/register_successfuly.html", {})
 
-def contact(request):
-    user = request.user
+def post_register_api(request):
+    first_name = request.POST.get("first_name")
+    last_name = request.POST.get("last_name")
+    email = request.POST.get("email")
+    username = request.POST.get("username")
+    password = request.POST.get("password")
 
-    context = {
-        'user' : user,
-    }
+    print(first_name, last_name, username, email, password)
 
-    return render (request, "homepage_page/contact.html", context)
+    try:
+        user = User.objects.create_user(username, email, password)
+        user.last_name = last_name
+        user.first_name = first_name
+        user.save()
+
+        return JsonResponse({
+            "was_registered": True,
+            "reason": None,
+        })
+
+    except Exception as e:
+        return JsonResponse({
+            "was_registered": False,
+            "reason": str(e),
+        });
+
+
 
 def login_page(request):
     return render (request, "gateway/login.html", {})
@@ -43,13 +62,13 @@ def post_login_api(request):
 
             # A backend authenticated the credentials
             return JsonResponse({
-                 "was_successful": True,
+                 "was_logged_in": True,
                  "reason": None,
             })
         else:
             # No backend authenticated the credentials
             return JsonResponse({
-                 "was_successful": False,
+                 "was_logged_in": False,
                  "reason": "Cannot log in, username or password is wrong.",
             })
 
@@ -59,24 +78,3 @@ def post_login_api(request):
              "was_successful": False,
              "reason": "Cannot log in, username or password is wrong.",
         })
-
-def post_register_api(request):
-    first_name = request.POST.get("first_name")
-    last_name = request.POST.get("last_name")
-    username = request.POST.get("username")
-    password = request.POST.get("password")
-
-    print(first_name, last_name, username, email, password)
-
-    try:
-        user = User.objects
-        return JsonResponse({
-            "was_registered": True,
-            "reason": None,
-        })
-
-    except Exception as e:
-        return JsonResponse({
-            "was_registered": False,
-            "reason": str(e),
-        });

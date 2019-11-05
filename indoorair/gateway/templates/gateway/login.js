@@ -9,15 +9,14 @@ function onLoginClick() {
     if (this.readyState == 4 && this.status == 200) {
       const login = this.responseText;
       var loginObject = JSON.parse(login);
-      if (loginObject.was_successful === true) {
+      if (loginObject.was_logged_in === true) {
         window.location.href = "{% url 'dashboard' %}";
       } else {
         alert(loginObject.reason);
       }
     }
   }
-  xhttp.open("POST", "{% url 'post_login_api' %}", true);
+  xhttp.open("POST", "{% url 'login_api' %}", true);
   xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-  const string = "username="+username+"&password="+password
-  xhttp.send(string)
+  xhttp.send("username="+username+"&password="+password);
 }
