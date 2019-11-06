@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Public bio-database</title>
+<title>IndoorAir | Login</title>
 </head>
 <body>
-<script>
-    {% include "gateway/login.js" %}
-</script>
-  <h1>Log in</h1>
-  <p>
-  Username:
-  <input id="username" name='username' type="text"></input>
-  </p>
+    <script>
+        {% include "gateway/login.js" %}
+    </script>
 
-  <p>
+    <h1>Login</h1>
+    <p>
+    Username:
+    <input id="username" name="username" type="text"></input>
+    </p>
+
+    <p>
     Password:
-  <input id='password' name="password" type="password"></input>
-  </p>
+    <input id="password" name="password" type="password"></input>
+    </p>
 
-  <p>
-    <button type="button" onclick="onLoginClick()">Log in</button>
-  </p>
-
+    <p>
+    <button type="button" onclick="onLoginClick()">Submit</button>
+    </p>
 </body>
 </html>

@@ -1,7 +1,4 @@
 function onLoginClick() {
-    const password = document.getElementById("password").value;
-    const username = document.getElementById("username").value;
-
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) { // Thisis the callback function
@@ -15,12 +12,17 @@ function onLoginClick() {
             if (resultObject.was_logged_in === false) {
                 alert(resultObject.reason);
             } else {
-                window.location.href = "/dashboard";
+                window.location.href = "{% url 'i_list_page' %}";
             }
         }
     }
 
-    xhttp.open("POST", "{% url 'login_api' %}", true);
+    xhttp.open("POST", "{% url 'instrument_create_api' %}", true);
     xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhttp.send("username="+username+"&password="+password);
+    const name = document.getElementById("name").value;
+    xhttp.send("name="+name);
+}
+
+function onBackClick() {
+    window.location.href = "{% url 'i_list_page' %}";
 }

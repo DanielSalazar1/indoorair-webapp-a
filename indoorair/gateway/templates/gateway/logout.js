@@ -1,7 +1,4 @@
-function onLoginClick() {
-    const password = document.getElementById("password").value;
-    const username = document.getElementById("username").value;
-
+function onPageLoadRunPostLogoutFromAPI() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) { // Thisis the callback function
@@ -12,15 +9,17 @@ function onLoginClick() {
             var resultObject = JSON.parse(resultString);
 
             // Please note, "was_logged_in" is a key set by the server.
-            if (resultObject.was_logged_in === false) {
+            if (resultObject.was_logged_out === false) {
                 alert(resultObject.reason);
             } else {
-                window.location.href = "/dashboard";
+                window.location.href = "{% url 'login_page' %}";
             }
         }
     }
 
-    xhttp.open("POST", "{% url 'login_api' %}", true);
+    xhttp.open("POST", "{% url 'logout_api' %}", true);
     xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhttp.send("username="+username+"&password="+password);
+    xhttp.send();
 }
+
+onPageLoadRunPostLogoutFromAPI();

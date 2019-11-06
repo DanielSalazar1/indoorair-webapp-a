@@ -1,95 +1,23 @@
-// function getTemperature() {
-//   cons temperature = document.getElementById('temperature').value;
-//   console.log(temperature);
-//
-//     var xhttp = new XMLHttpRequest();
-//     xhttp.onreadystatechange = function() {
-//       if (this.readyState == 4 && this.status == 200) {
-//         result = JSON.parse(this.responseText);
-//         document.getElementById('temperature').innerHTML = result.temperature;
-//       }
-//     };
-//     xhttp.open('POST', "{% url 'temperature_page' %}", true);
-//     xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded")
-//     xhttp.send("temperature="+temperature);
-// }
-
-function getTemperature() {
-  const temperature1 = document.getElementById('temperature').value;
-  console.log(temperature1);
-
+function onPageLoadGetDashboardAPI() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var resultObj = JSON.parse(this.responseText);
-        resultObj = document.getElementById('temperature_avg');
-      }
-    };
-    xhttp.open('POST', "{% url 'temperature_page' %}", true);
-    xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhttp.send("&temperature_avg="+temperature1);
+        if (this.readyState == 4 && this.status == 200) {
+            const dataString = this.responseText;
+            const dataObj = JSON.parse(dataString);
+
+            document.getElementById("avg_temperature").innerHTML = dataObj.avg_temperature;
+            document.getElementById("avg_pressure").innerHTML = dataObj.avg_pressure;
+            document.getElementById("avg_co2").innerHTML = dataObj.avg_co2;
+            document.getElementById("avg_tvoc").innerHTML = dataObj.avg_tvoc;
+            document.getElementById("avg_humidity").innerHTML = dataObj.avg_humidity;
+        }
+    }
+    xhttp.open("GET","api/dashboard", true);
+    xhttp.send();
 }
 
-function getPressure() {
-  const pressure1 = document.getElementById('pressure').value;
-  console.log(pressure1);
+onPageLoadGetDashboardAPI();
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var resultObj = JSON.parse(this.responseText);
-        resultObj = document.getElementById('pressure_avg');
-      }
-    };
-    xhttp.open('POST', "{% url 'pressure_page' %}", true);
-    xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhttp.send("&pressure_avg="+pressure1);
-}
-
-function getCO2() {
-  const co2a = document.getElementById('co2').value;
-  console.log(co2a);
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var resultObj = JSON.parse(this.responseText);
-        resultObj = document.getElementById('co2_avg');
-      }
-    };
-    xhttp.open('POST', "{% url 'co2_page' %}", true);
-    xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhttp.send("&co2_avg="+co2a);
-}
-
-function getTvoc() {
-  const tvoc1 = document.getElementById('tvoc').value;
-  console.log(tvoc1);
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var resultObj = JSON.parse(this.responseText);
-        resultObj = document.getElementById('tvoc_avg');
-      }
-    };
-    xhttp.open('POST', "{% url 'tvoc_page' %}", true);
-    xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhttp.send("&tvoc_avg="+tvoc1);
-}
-
-function getHumidity() {
-  const humidity1 = document.getElementById('humidity').value;
-  console.log(humidity1);
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        var resultObj = JSON.parse(this.responseText);
-        resultObj = document.getElementById('humidity_avg');
-      }
-    };
-    xhttp.open('POST', "{% url 'humidity_page' %}", true);
-    xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    xhttp.send("&humidity_avgs ="+humidity1);
+function onLogoutClick() {
+    window.location.href = "{% url 'logout_page' %}";
 }

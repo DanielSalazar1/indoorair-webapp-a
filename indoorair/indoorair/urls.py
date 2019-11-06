@@ -21,4 +21,7 @@ urlpatterns = [
     path('', include('homepage_page.urls')),
     path('', include('gateway.urls')),
     path('', include('dashboard.urls')),
+    path('', include('foundations.urls')),
+    path('', include('userprofile.urls')),
+    path('', include('instrument.urls')),
 ]

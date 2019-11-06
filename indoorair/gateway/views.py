@@ -1,30 +1,55 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from django.shortcuts import render # STEP 1 - Import
+from django.shortcuts import redirect
+from django.contrib.auth.models import User # STEP 1: Import the user
 from django.contrib.auth import authenticate, login, logout
 
 
 def register_page(request):
-    user = request.user
+    # STEP 2 - Do something w/ models.
+    # ...
 
-    context = {
-        'user' : user,
-    }
+    # STEP 3 - Do something w/ context.
+    # ..
 
-    return render (request, "gateway/register.html", {})
+    # STEP 4 - Use the `render` function.
+    return render(request, "gateway/register.html", {})
 
-def register_success(request):
-    return render(request, "gateway/register_successfuly.html", {})
+
+def register_success_page(request):
+    # STEP 2 - Do something w/ models.
+    # ...
+
+    # STEP 3 - Do something w/ context.
+    # ..
+
+    # STEP 4 - Use the `render` function.
+    return render(request, "gateway/register_success.html", {})
+
+
+def login_page(request):
+    # STEP 2 - Do something w/ models.
+    # ...
+
+    # STEP 3 - Do something w/ context.
+    # ..
+
+    # STEP 4 - Use the `render` function.
+    return render(request, "gateway/login.html", {})
+
 
 def post_register_api(request):
     first_name = request.POST.get("first_name")
     last_name = request.POST.get("last_name")
     email = request.POST.get("email")
-    username = request.POST.get("username")
     password = request.POST.get("password")
+    username = request.POST.get("username")
 
+    # This is for debugging purposes only.
     print(first_name, last_name, username, email, password)
 
+    # STEP 3: Plug in our data from the request into our `User` model.
     try:
         user = User.objects.create_user(username, email, password)
         user.last_name = last_name
@@ -32,20 +57,15 @@ def post_register_api(request):
         user.save()
 
         return JsonResponse({
-            "was_registered": True,
-            "reason": None,
+             'was_registered': True,
+             'reason': None,
         })
-
     except Exception as e:
         return JsonResponse({
-            "was_registered": False,
-            "reason": str(e),
-        });
+             'was_registered': False,
+             'reason': str(e),
+        })
 
-
-
-def login_page(request):
-    return render (request, "gateway/login.html", {})
 
 def post_login_api(request):
     username = request.POST.get("username")
@@ -77,4 +97,31 @@ def post_login_api(request):
         return JsonResponse({
              "was_successful": False,
              "reason": "Cannot log in, username or password is wrong.",
+        })
+
+
+
+def logout_page(request):
+    # STEP 2 - Do something w/ models.
+    # ...
+
+    # STEP 3 - Do something w/ context.
+    # ..
+
+    # STEP 4 - Use the `render` function.
+    return render(request, "gateway/logout.html", {})
+
+
+def post_logout_api(request):
+    try:
+        logout(request)
+        return JsonResponse({
+             "was_logged_out": True,
+             "reason": None,
+        })
+    except Exception as e:
+        print(e)
+        return JsonResponse({
+             "was_logged_out": False,
+             "reason": str(e),
         })

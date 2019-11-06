@@ -1,52 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Public bio-database</title>
+<title>IndoorAir | Home</title>
 </head>
 <body>
-
-<h1>This is the dashboard page</h1>
-
-  <p>Here's the info you can access through this page.</p>
-
-  <h2>Average temperature</h2>
-
-    <input id="temperature" type="number" name="temperature"></input>
-  <p>This is the average temperature.</p>
-
-  <button type="button" onclick=getTemperature();>Click here</button>
-
-  <h2>Average pressure</h2>
-
-    <input id="pressure" type="number" name="pressure"></input>
-  <p>This is the average pressure.</p>
-
-  <button type="button" onclick=getPressure();>Click here</button>
-
-  <h2>Average CO2</h2>
-
-    <input id="co2" type="number" name="co2"></input>
-  <p>This is the average CO2.</p>
-
-  <button type="button" onclick=getCO2();>Click here</button>
-
-  <h2>Average TVOC</h2>
-
-    <input id="tvoc" type="number" name="tvoc"></input>
-  <p>This is the average TVOC.</p>
-
-  <button type="button" onclick=getTvoc();>Click here</button>
-
-  <h2>Average humidity</h2>
-
-    <input id="humidity" type="number" name="humidity"></input>
-  <p>This is the average humidity</p>
-
-  <button type="button" onclick=getHumidity();>Click here</button>
-
-  <script>
-      {% include "dashboard/dashboard.js" %}
-  </script>
+    <script>
+        {% include "dashboard/dashboard.js" %}
     </script>
-    </body>
+
+    <h1>Dashboard</h1>
+    <p>Welcome to your dashboard. Your averages are:</p>
+    <p>Average Temperature:</p>
+    <p id="avg_temperature">---</p>
+    <p>Average Humidity:</p>
+    <p id="avg_humidity">---</p>
+    <p>Average CO2:</p>
+    <p id="avg_co2">---</p>
+    <p>Average Pressure:</p>
+    <p id="avg_pressure">---</p>
+    <p>Average TVOC:</p>
+    <p id="avg_tvoc">---</p>
+    <br />
+    <a href="{% url 'i_list_page' %}">List Instruments</a>
+    <a href="{% url 'profile_retrieve_page' %}">View Profile</a>
+
+    <button onclick="onLogoutClick();">Logout</button>
+
+</body>
 </html>

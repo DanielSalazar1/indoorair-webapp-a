@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>IndoorAir | Register</title>
+<title>IndoorAir | Update Profile</title>
 </head>
 <body>
     <script>
-        {% include "gateway/register.js" %}
+        {% include "userprofile/update.js" %}
     </script>
 
-    <h1>Register</h1>
+    <h1>Update Profile</h1>
     <p>
     First Name:
     <input id="first_name" name="first_name" type="text"></input>
@@ -20,22 +20,19 @@
     </p>
 
     <p>
-    Email:
+    Last Name:
     <input id="email" name="email" type="text"></input>
     </p>
 
     <p>
-    Username:
+    username:
     <input id="username" name="username" type="text"></input>
     </p>
 
     <p>
-    Password:
-    <input id="password" name="password" type="password"></input>
-    </p>
+    <button type="button" onclick="onBackClick()">Back</button>
+    <button type="button" onclick="onSubmitClick()">Submit</button>
 
-    <p>
-    <button type="button" onclick="onRegisterClick()">Submit</button>
     </p>
 </body>
 </html>
