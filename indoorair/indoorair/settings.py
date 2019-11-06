@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'foundations.apps.FoundationsConfig',
     'dashboard.apps.DashboardConfig',
     'gateway.apps.GatewayConfig',
-    'homepage_page.apps.HomepagePageConfig',
+    'homepage.apps.HomepagePageConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
